@@ -3,11 +3,15 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import login_required, login_user, logout_user
 
-from main.extensions import login_manager
+from main.extensions import login_manager,rocket
 from main.public.forms import LoginForm
 from main.user.forms import RegisterForm
 from main.user.models import User
-from main.utils import flash_errors
+from main.utils import flash_errors,templated
+
+from pprint import pprint
+
+
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
@@ -19,8 +23,25 @@ def load_user(user_id):
 
 
 @blueprint.route('/', methods=['GET', 'POST'])
+@templated()
 def home():
     """Home page."""
+
+    
+
+
+    r = rocket.users_register(
+        email='6471752@qq.com',
+        name='6471752',
+        password='123456',
+        username='6471752'
+    )
+    try:
+        print(r)
+    except Exception as e:
+        print(str(e))
+
+
     form = LoginForm(request.form)
     # Handle logging in
     if request.method == 'POST':
@@ -31,7 +52,7 @@ def home():
             return redirect(redirect_url)
         else:
             flash_errors(form)
-    return render_template('public/home.html', form=form)
+    return dict(form=form)
 
 
 @blueprint.route('/logout/')
@@ -44,6 +65,7 @@ def logout():
 
 
 @blueprint.route('/register/', methods=['GET', 'POST'])
+@templated()
 def register():
     """Register new user."""
     form = RegisterForm(request.form)
@@ -53,11 +75,12 @@ def register():
         return redirect(url_for('public.home'))
     else:
         flash_errors(form)
-    return render_template('public/register.html', form=form)
+    return dict(form=form)
 
 
 @blueprint.route('/about/')
+@templated()
 def about():
     """About page."""
     form = LoginForm(request.form)
-    return render_template('public/about.html', form=form)
+    return dict(form=form)

@@ -3,7 +3,7 @@
 from flask import Flask, render_template
 
 from main import commands, public, user
-from main.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, bootstrap
+from main.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, bootstrap, api
 
 
 def create_app(config_object='main.settings'):
@@ -31,6 +31,11 @@ def register_extensions(app):
     debug_toolbar.init_app(app)
     migrate.init_app(app, db)
     bootstrap.init_app(app)
+
+    #添加rest_ful_api
+    from main.api import url
+
+    api.init_app(app)
     return None
 
 
@@ -38,6 +43,7 @@ def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
+
     return None
 
 

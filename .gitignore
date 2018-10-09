@@ -42,9 +42,6 @@ docs/_build
 
 .webassets-cache
 
-# Virtualenvs
-env/
-
 # npm
 /node_modules/
 
@@ -59,4 +56,6 @@ env/
 *.db
 
 #virtualenv
-venv
+venv/
+
+
