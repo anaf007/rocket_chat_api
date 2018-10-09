@@ -13,16 +13,15 @@ the flask rocket.chat，
     cd rockat_chat_api
     pip install -r requirements/dev.txt
     cp .env.example .env
-    npm install
-    npm start  
+    flask run
 
 
-::
+迁移更新::
 
     flask db init
     flask db migrate
     flask db upgrade
-    npm start
+    flask run
 
 
 部署
@@ -33,6 +32,5 @@ the flask rocket.chat，
     export FLASK_ENV=production
     export FLASK_DEBUG=0
     export DATABASE_URL="<YOUR DATABASE URL>"
-    npm run build   # build assets with webpack
     flask run       # start the flask server
 

@@ -3,7 +3,7 @@
 from flask import Flask, render_template
 
 from main import commands, public, user
-from main.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, webpack
+from main.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, bootstrap
 
 
 def create_app(config_object='main.settings'):
@@ -11,7 +11,7 @@ def create_app(config_object='main.settings'):
 
     :param config_object: The configuration object to use.
     """
-    app = Flask(__name__.split('.')[0])
+    app = Flask(__name__.split('.')[0],static_folder='../static',template_folder='../tpl')    
     app.config.from_object(config_object)
     register_extensions(app)
     register_blueprints(app)
@@ -30,7 +30,7 @@ def register_extensions(app):
     login_manager.init_app(app)
     debug_toolbar.init_app(app)
     migrate.init_app(app, db)
-    webpack.init_app(app)
+    bootstrap.init_app(app)
     return None
 
 
