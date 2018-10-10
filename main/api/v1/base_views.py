@@ -48,7 +48,7 @@ class Directory(Resource):
     def get(self):
         """ https://rocket.chat/docs/developer-guides/rest-api/miscellaneous/directory/
         
-        .. list-table:: 基本请求
+        .. list-table:: 请求信息
             :header-rows: 1
 
             * - URL
@@ -63,23 +63,15 @@ class Directory(Resource):
             curl http://localhost:5000/api/v1/bases/directory
 
         返回:
-         - version:版本号
-         - state:状态 success false 
+            None
 
-        ::
-
-            {
-                "version": "0.71.0-develop",
-                "state": true
-            }
         """
         try:
             r = rocket.directory('').json()
         except Exception as e:
-            print(str(e))
+            
             r = None
 
-        pprint(r)
 
         if not r:
             return {'state':'false'},404
@@ -87,10 +79,123 @@ class Directory(Resource):
         return {'version':r['info']['version'],'state':r['success']},200           
 
 
+class ShieldSvg(Resource):
+    """返回svg"""
+
+    def get(self):
+        """https://rocket.chat/docs/developer-guides/rest-api/miscellaneous/shield-svg/
+
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/shield.svg
+              - 不需要
+              - GET
+
+        .. list-table:: 查询参数
+            :header-rows: 1
+
+            * - 名称
+              - 例子
+              - 必要
+              - 描述
+            * - type
+              - online
+              - 可选
+              - 可以是一个online，user，channel
+            * - icon
+              - false
+              - 可选
+              - 
+            * - channel
+              - general
+              - 可选
+              - 频道名称
+            * - name
+              - Rocket.Chat 
+              - 可选
+              - 要显示的名称
+
+        **示例请求**::
+
+            curl http://localhost:5000/api/v1/bases/shield_svg
+
+        **请求结果**:   
+        
+            header::
+
+                Content-Type:image/svg+xml;charset=utf-8 
+
+            body::
+
+                None
+
+        """
+
+        return {'state':'false'},404
+
+
+
+class Spotlight(Resource):
+    """搜索用户可见的用户或房间。"""
+
+    def get(self):
+        """https://rocket.chat/docs/developer-guides/rest-api/miscellaneous/spotlight/
+
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/shield.svg
+              - 需要
+              - GET
+
+        .. list-table:: 查询参数
+            :header-rows: 1
+
+            * - 名称
+              - 例子
+              - 必要
+              - 描述
+            * - query
+              - john
+              - 需要
+              - 要搜索的术语。支持频道'＃'和用户'@'
+
+        **示例请求**::
+
+            curl http://localhost:5000/api/v1/bases/spotlight
+
+        **请求结果**::
+
+            {
+                "message": "You must be logged in to do this.",
+                "status": "error"
+            }  
+        """
+
+        try:
+            r = rocket.spotlight().json()
+        except Exception as e:
+            r = None
+
+        pprint(r)
+        if not r:
+            return {'state':'false'},404
+
+        return {'message':r['message'],'status':r['status']},404
+
 
 
 api.add_resource(Info, f'/api/{v1}/bases/info')         
 api.add_resource(Directory, f'/api/{v1}/bases/directory')         
+api.add_resource(ShieldSvg, f'/api/{v1}/bases/shield_svg')         
+api.add_resource(Spotlight, f'/api/{v1}/bases/spotlight')         
 
 
 

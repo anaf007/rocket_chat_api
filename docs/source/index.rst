@@ -30,10 +30,10 @@
      - 完成
    * - /api/v1/directory
      - 在服务器上搜索所有用户或频道
-     -
+     - 需要auth，未完成
    * - /api/v1/shield.svg
      - 获取网站或者添加svg
-     -
+     - 插件无该接口
    * - /api/v1/spotlight
      - 搜索可用的房间或者用户
      -
