@@ -6,6 +6,9 @@ from main import commands, public, user
 from main.extensions import bcrypt, cache, csrf_protect, db, debug_toolbar, login_manager, migrate, bootstrap, api
 
 
+
+
+
 def create_app(config_object='main.settings'):
     """An application factory, as explained here: http://flask.pocoo.org/docs/patterns/appfactories/.
 
@@ -18,6 +21,7 @@ def create_app(config_object='main.settings'):
     register_errorhandlers(app)
     register_shellcontext(app)
     register_commands(app)
+
     return app
 
 
@@ -31,11 +35,11 @@ def register_extensions(app):
     debug_toolbar.init_app(app)
     migrate.init_app(app, db)
     bootstrap.init_app(app)
-
+    
     #添加rest_ful_api
-    from main.api import url
-
+    from main import api as v_api
     api.init_app(app)
+    
     return None
 
 

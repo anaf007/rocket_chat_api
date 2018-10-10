@@ -55,7 +55,7 @@ docs/_build
 # Development database
 *.db
 
-#virtualenv
+#Virtualenv
 venv/
 
 

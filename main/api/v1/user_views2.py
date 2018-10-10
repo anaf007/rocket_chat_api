@@ -1,13 +1,14 @@
 from flask_restful import Resource
+from main.extensions import api
 
-class HelloWorld(Resource):
-    """Posts collection."""
+class Hello(Resource):
+    """创建用户."""
     def get(self):
         """返回数据.
 
         .. :quickref: Posts Collection; Get collection of posts.
 
-        **Example request**:
+        **示例请求**:
 
         .. sourcecode:: http
 
@@ -15,7 +16,7 @@ class HelloWorld(Resource):
           Host: example.com
           Accept: application/json
 
-        **Example response**:
+        **示例请求**:
 
         .. sourcecode:: http
 
@@ -47,3 +48,19 @@ class HelloWorld(Resource):
         :returns: :class:`myapp.objects.Post`
         """
         return {'hello': 'world'}
+
+
+
+        
+class CreateUser(Resource):
+    """创建用户."""
+    
+
+
+
+
+from .version import dev_1
+v1 = dev_1
+# api.add_resource(Hello, f'/api_{v1}/user/hello') 
+api.add_resource(Hello, f'/api_{v1}/user/create') 
+

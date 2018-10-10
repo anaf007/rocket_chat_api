@@ -27,19 +27,25 @@ def load_user(user_id):
 def home():
     """Home page."""
 
+    try:
+        r = rocket.info()
+        pprint(r.json())
+    except Exception as e:
+        print(str(e))
+
     
 
 
-    r = rocket.users_register(
-        email='6471752@qq.com',
-        name='6471752',
-        password='123456',
-        username='6471752'
-    )
-    try:
-        print(r)
-    except Exception as e:
-        print(str(e))
+    # r = rocket.users_register(
+    #     email='6471752@qq.com',
+    #     name='6471752',
+    #     password='123456',
+    #     username='6471752'
+    # )
+    # try:
+    #     print(r)
+    # except Exception as e:
+    #     print(str(e))
 
 
     form = LoginForm(request.form)
