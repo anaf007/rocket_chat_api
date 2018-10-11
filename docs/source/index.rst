@@ -65,17 +65,16 @@
    * - URL
      - 描述
      - 进度
-   * - /api/v1/login
+   * - /api/v1/users/login
      - 使用REST API进行身份验证。
-     -
-   * - /api/v1/me
+     - 完成
+   * - /api/v1/users/me
      - 显示有关已验证用户的信息。
-     -
+     - 完成
 
 
 .. automodule:: main.api.v1.authentication_views
    :members:
-   :undoc-members: 
 
 
 用户模块

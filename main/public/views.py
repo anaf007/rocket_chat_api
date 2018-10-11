@@ -11,6 +11,8 @@ from main.utils import flash_errors,templated
 
 from pprint import pprint
 
+from requests import put, get as rget
+
 
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
@@ -27,11 +29,17 @@ def load_user(user_id):
 def home():
     """Home page."""
 
-    try:
-        r = rocket.info()
-        pprint(r.json())
-    except Exception as e:
-        print(str(e))
+    url = 'http://localhost:5000/api/v1/users/login'
+
+    result = put(url, data={'username': '6471750','pwd':'an090987'})
+    result = (result.json())
+
+    userId = result['userId']
+    authToken = result['authToken']
+
+    url = 'http://localhost:5000/api/v1/users/me'
+    result = rget(url)
+    print(result.json())
 
     
 

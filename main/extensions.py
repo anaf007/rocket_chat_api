@@ -20,4 +20,5 @@ cache = Cache()
 debug_toolbar = DebugToolbarExtension()
 bootstrap = Bootstrap()
 rocket = RocketChat()
-api = Api()
+#排除csrf
+api = Api(decorators=[csrf_protect.exempt])
