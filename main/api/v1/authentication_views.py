@@ -18,11 +18,10 @@ class Login(Resource):
 
         **请求示例**::
 
-            curl http://localhost:5000/api/v1/users/login -d "username=myusername&password=mypassword"
+            curl http://localhost:5000/api/v1/auth/login -d "username=myusername&password=mypassword"
             #or
-            from requests import put, get
+            from requests import put
             result = put(url, data={'username': username,'pwd':pwd})
-            print(result.json())
 
         请求结果：
          - status：success
@@ -62,11 +61,10 @@ class Me(Resource):
 
         **请求示例**::
 
-            curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" -H "X-User-Id: aobEdbYhXfu5hkeqG" http://localhost:5000/api/v1/users/me
+            curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" -H "X-User-Id: aobEdbYhXfu5hkeqG" http://localhost:5000/api/v1/auth/me
             #or
-            from requests import put, get
+            from requests import get
             result = get(url)
-            print(result.json())
 
         请求结果：
          - user_id
@@ -86,8 +84,6 @@ class Me(Resource):
             print(str(e))
             r = None
 
-          
-
         if not r:
             return {'success':'false','message':'获取个人信息失败，请重新登录。'},401
         
@@ -104,14 +100,8 @@ class Me(Resource):
             'success' : r['success']
         },200
 
-
-        
-
-
-        
-
-api.add_resource(Login, f'/api/{v1}/users/login')   
-api.add_resource(Me, f'/api/{v1}/users/me')   
+api.add_resource(Login, f'/api/{v1}/auth/login')   
+api.add_resource(Me, f'/api/{v1}/auth/me')   
 
 
 

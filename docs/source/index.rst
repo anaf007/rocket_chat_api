@@ -25,30 +25,30 @@
    * - URL
      - 描述
      - 进度
-   * - /api/v1/info
+   * - /api/v1/bases/info
      - Rocket.Chat服务信息
-     - 完成
-   * - /api/v1/directory
+     - 已完成
+   * - /api/v1/bases/directory
      - 在服务器上搜索所有用户或频道
-     - 需要auth，未完成
-   * - /api/v1/shield.svg
+     - 已完成
+   * - /api/v1/bases/shield_svg
      - 获取网站或者添加svg
      - 插件无该接口
-   * - /api/v1/spotlight
+   * - /api/v1/bases/spotlight
      - 搜索可用的房间或者用户
-     -
-   * - /api/v1/statistics
+     - 已完成
+   * - /api/v1/bases/statistics
      - 有关Rocket.Chat服务器的统计信息
-     -
-   * - /api/v1/statistics.list
-     - 有关Rocket.Chat服务器的可选统计信息。
-     -
-   * - /api/v1/assets.setAsset
+     - 已完成
+   * - /api/v1/bases/statistics_list
+     - 服务器统计信息列表。
+     - 已完成
+   * - /api/v1/bases/assets_setAsset
      - 按名称设置资产图像
-     -
-   * - /api/v1/assets.unsetAsset
+     - 插件无该接口
+   * - /api/v1/bases/assets_unsetAsset
      - 按名称取消资产设置
-     -
+     - 插件无该接口
 
 
 .. automodule:: main.api.v1.base_views
@@ -65,10 +65,10 @@
    * - URL
      - 描述
      - 进度
-   * - /api/v1/users/login
+   * - /api/v1/auth/login
      - 使用REST API进行身份验证。
      - 完成
-   * - /api/v1/users/me
+   * - /api/v1/auth/me
      - 显示有关已验证用户的信息。
      - 完成
 
@@ -87,12 +87,12 @@
    * - URL
      - 描述
      - 进度
-   * - /api/v1/users.create
+   * - /api/v1/user/create
      - 创建一个新用户。
-     -
-   * - /api/v1/users.createToken
+     - 已完成
+   * - /api/v1/user/createToken
      - 创建用户身份验证令牌。
-     -
+     - 已完成
    * - /api/v1/users.delete
      - 删除现有用户。
      -
@@ -118,7 +118,7 @@
      - 获取用户的在线状态。
      -
    * - /api/v1/users.getUsernameSuggestion
-     - 获取建议用户的新用户名。
+     - 获取用户的建议
      -
    * - /api/v1/users.info
      - 获取用户的信息，仅限于调用者的权限。
@@ -154,7 +154,6 @@
 
 .. automodule:: main.api.v1.user_views
    :members:
-   :undoc-members:  
 
 
 频道

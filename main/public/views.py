@@ -11,7 +11,7 @@ from main.utils import flash_errors,templated
 
 from pprint import pprint
 
-from requests import put, get as rget
+from requests import put, get 
 
 
 
@@ -29,31 +29,29 @@ def load_user(user_id):
 def home():
     """Home page."""
 
-    url = 'http://localhost:5000/api/v1/users/login'
+    url = 'http://localhost:5000/api/v1/auth/login'
 
-    result = put(url, data={'username': '6471750','pwd':'an090987'})
-    result = (result.json())
+    result = put(url, data={'username': 'anaf','pwd':'123456'})
 
-    userId = result['userId']
-    authToken = result['authToken']
+    userId = result.json()['userId']
+    authToken = result.json()['authToken']
 
-    url = 'http://localhost:5000/api/v1/users/me'
-    result = rget(url)
-    print(result.json())
-
-    
-
-
-    # r = rocket.users_register(
-    #     email='6471752@qq.com',
-    #     name='6471752',
-    #     password='123456',
-    #     username='6471752'
-    # )
     # try:
-    #     print(r)
+    #     r = rocket.users_create(
+    #         email='anngle02@163.com',
+    #         name='anngle02',
+    #         password='anngle02',
+    #         username='anngle02'
+    #     )
     # except Exception as e:
-    #     print(str(e))
+    #     print(ste(e))
+    #     r = 'error'
+
+    # print(r.json())
+
+    # pprint(r)
+
+
 
 
     form = LoginForm(request.form)
