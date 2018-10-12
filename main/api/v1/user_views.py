@@ -59,15 +59,16 @@ class CreateUser(Resource):
               - { twitter: '@example' }
               - 默认undefined
 
-
         **示例请求**::
 
-            rocket.users_create(
-                email=email,
-                name=name,
-                password=password,
-                username=username,
-            )
+            from requests import put
+            data={
+                'email': 'rocket@rocket.com',
+                'name':'rocket',
+                'password':'rocket',
+                'username':'rocket',
+            }
+            result = put(url,data=data)
 
         请求结果：
          - user:json
@@ -230,37 +231,278 @@ class Delete(Resource):
               - BsNr28znDkG8aeo7W
               - 必须
               - 输入用户ID
-      
 
+        **请求示例**::
+
+            result = get(url,{'user_id':'BsNr28znDkG8aeo7W'})
+
+        请求结果：
+         - success
         """
 
+        userid = request.args.get('user_id')
+        try:
+            r = rocket.users_delete(userid)
+        except Exception as e:
+            r = None
+
+        if not r:  
+            return {'success':False,'message':'删除失败，请输入正确的user_id.'},401
+
+        return {'success':True}
+                  
+
 class DeleteOwnAccount(Resource):
-    """用户删除自己的帐户。"""
+    """用户删除自己的帐户。该插件无接口"""
     pass
 
 class ForgotPassword(Resource):
     """重置密码。"""
-    pass
+    def get(self):
+        """https://rocket.chat/docs/developer-guides/rest-api/users/forgotpassword/
+        
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/user/forgotPassword
+              - 不需要
+              - GET
+
+        .. list-table:: 请求参数
+            :header-rows: 1
+
+            * - 参数名称
+              - 示例
+              - 是否必须
+              - 描述
+            * - email
+              - rocket@rocket.com
+              - 必须
+              - 发送密码重置链接到该电子邮件
+
+        **请求示例**::
+
+            result = get(url,{'email':'rocket@rocket.com'})
+
+        请求结果：
+         - success
+        """
+        email = request.args.get('email')
+        try:
+            r = rocket.users_forgot_password(email)
+        except Exception as e:
+            r = None
+
+        if not r:  
+            return {'success':False,'message':'发送重置密码邮件失败！'},401
+
+        return {'success':True}
+
+
 
 class GeneratePersonalAccessToken(Resource):
-    """生成个人访问令牌。"""
+    """生成个人访问令牌。插件无该接口"""
     pass
 
 class GetAvatar(Resource):
     """获取用户头像的URL。"""
-    pass
+    def get(self):
+        """https://rocket.chat/docs/developer-guides/rest-api/users/getavatar/
+        
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/user/getAvatar
+              - 不需要
+              - GET
+
+        .. list-table:: 请求参数
+            :header-rows: 1
+
+            * - 参数名称
+              - 示例
+              - 是否必须
+              - 描述
+            * - username
+              - rocket
+              - 必须
+              - 输入要显示头像的用户名
+
+        **请求示例**::
+
+            result = get(url,{'username':'rocket'})
+
+        请求结果：
+         - result:string url
+         - success:boolean
+
+        """
+
+        username = request.args.get('username')
+        try:
+            r = rocket.users_get_avatar(username=username)
+        except Exception as e:
+            r = None
+
+        if not r:  
+            return {'success':False,'message':'获取头像失败。'},401
+
+        return {
+            'success':True,
+            'result':r.url,
+        }
+
+
+
 
 class GetPersonalAccessTokens(Resource):
-    """获取用户的个人访问令牌。"""
+    """获取用户的个人访问令牌。插件无该接口"""
     pass
 
 class GetPreferences(Resource):
-    """获取用户的所有首选项。"""
-    pass
+    """获取用户的所有首选项。
+
+    2018-10-12接口已完成，可能是本机问题环境问题，提示错误，无法取得结果
+    
+    mac提示：{'success': False, 'error': "Cannot set property 'language' of undefined"}
+
+    """
+    def get(self):
+        """https://rocket.chat/docs/developer-guides/rest-api/users/get-preferences/
+        
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/user/getPreferences
+              - 需要auth
+              - GET
+
+        
+        **请求示例**::
+
+            result = get(url)
+
+        请求结果：
+         - preferences:json
+         - success:boolean
+
+        ::
+
+            {
+                "preferences": {
+                    "newRoomNotification": "door",
+                    "newMessageNotification": "chime",
+                    "muteFocusedConversations": true,
+                    "useEmojis": true,
+                    "convertAsciiEmoji": true,
+                    "saveMobileBandwidth": true,
+                    "collapseMediaByDefault": false,
+                    "autoImageLoad": true,
+                    "emailNotificationMode": "all",
+                    "roomsListExhibitionMode": "category",
+                    "unreadAlert": true,
+                    "notificationsSoundVolume": 100,
+                    "desktopNotifications": "default",
+                    "mobileNotifications": "default",
+                    "enableAutoAway": true,
+                    "highlights": [],
+                    "desktopNotificationDuration": 0,
+                    "viewMode": 0,
+                    "hideUsernames": false,
+                    "hideRoles": false,
+                    "hideAvatars": false,
+                    "hideFlexTab": false,
+                    "sendOnEnter": "normal",
+                    "roomCounterSidebar": false
+                },
+                "success": true
+            }
+
+        """
+
+        try:
+            r = rocket.users_get_preferences()
+        except Exception as e:
+            r = None
+
+        if not r:  
+            return {'success':False,'message':'获取失败。'},401
+
+        return {
+            'success':True,
+            'result':r.json()['preferences'],
+        }
+
 
 class GetPresence(Resource):
     """获取用户的在线状态。"""
-    pass
+    def get(self):
+        """https://rocket.chat/docs/developer-guides/rest-api/users/getpresence/
+        
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/user/getPresence
+              - 需要
+              - GET
+
+        .. list-table:: 请求参数
+            :header-rows: 1
+
+            * - 参数名称
+              - 示例
+              - 是否必须
+              - 描述
+            * - username
+              - rocket
+              - 必须
+              - 输入查询在线的用户的用户名
+
+        **请求示例**::
+
+            result = get(url,{'username':'rocket'})
+
+        请求结果：
+         - success:boolean
+         - lastLogin
+         - presence
+
+        ::
+
+            {
+                "success": true,
+                "presence": "offline",
+                "lastLogin": "2018-10-12T08:37:28.101Z"
+            }
+        """
+        username = request.args.get('username')
+        try:
+            r = rocket.users_get_presence(username=username)
+        except Exception as e:
+            r = None
+
+        if not r:
+            return {'success':False,'message':'查询失败。'},401
+        
+        r = r.json()
+        return {
+            'success':True,
+            'presence':r['presence'],
+            'lastLogin':r['lastLogin'],
+        }
+        
 
 class GetUsernameSuggestion(Resource):
     """获取用户的建议"""
@@ -314,6 +556,11 @@ v1 = dev_1
 api.add_resource(CreateUser, f'/api/{v1}/user/create')         
 api.add_resource(CreateToken, f'/api/{v1}/user/create_token')         
 api.add_resource(Delete, f'/api/{v1}/user/delete')         
+api.add_resource(DeleteOwnAccount, f'/api/{v1}/user/deleteOwnAccount')         
+api.add_resource(ForgotPassword, f'/api/{v1}/user/forgotPassword')         
+api.add_resource(GetAvatar, f'/api/{v1}/user/getAvatar')         
+api.add_resource(GetPreferences, f'/api/{v1}/user/getPreferences')         
+api.add_resource(GetPresence, f'/api/{v1}/user/getPresence')         
 
 
 

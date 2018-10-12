@@ -50,14 +50,12 @@
      - 按名称取消资产设置
      - 插件无该接口
 
-
 .. automodule:: main.api.v1.base_views
    :members:
 
 
 身份验证
 ====================================================================
-
 
 .. list-table:: 身份验证列表，共计2个
    :header-rows: 1
@@ -72,14 +70,12 @@
      - 显示有关已验证用户的信息。
      - 完成
 
-
 .. automodule:: main.api.v1.authentication_views
    :members:
 
 
 用户模块
 ====================================================================
-
 
 .. list-table:: 用户模块列表，共计21个
    :header-rows: 1
@@ -93,64 +89,63 @@
    * - /api/v1/user/createToken
      - 创建用户身份验证令牌。
      - 已完成
-   * - /api/v1/users.delete
+   * - /api/v1/user/delete
      - 删除现有用户。
-     -
-   * - /api/v1/users.deleteOwnAccount
+     - 已完成
+   * - /api/v1/user/deleteOwnAccount
      - 用户删除自己的帐户。
-     -
-   * - /api/v1/users.forgotPassword
+     - 插件无该接口
+   * - /api/v1/user/forgotPassword
      - 重置密码。
-     -
-   * - /api/v1/users.generatePersonalAccessToken
+     - 已完成
+   * - /api/v1/user/generatePersonalAccessToken
      - 生成个人访问令牌。
-     -
-   * - /api/v1/users.getAvatar
+     - 插件无该接口
+   * - /api/v1/user/getAvatar
      - 获取用户头像的URL。
-     -
-   * - /api/v1/users.getPersonalAccessTokens
+     - 已完成
+   * - /api/v1/user/getPersonalAccessTokens
      - 获取用户的个人访问令牌。
-     -
-   * - /api/v1/users.getPreferences
+     - 插件无该接口
+   * - /api/v1/user/getPreferences
      - 获取用户的所有首选项。
-     -
-   * - /api/v1/users.getPresence
+     - 已完成
+   * - /api/v1/user/getPresence
      - 获取用户的在线状态。
-     -
-   * - /api/v1/users.getUsernameSuggestion
+     - 已完成
+   * - /api/v1/user/getUsernameSuggestion
      - 获取用户的建议
      -
-   * - /api/v1/users.info
+   * - /api/v1/user/info
      - 获取用户的信息，仅限于调用者的权限。
      -
-   * - /api/v1/users.list
+   * - /api/v1/user/list
      - 所有用户及其信息，仅限于权限。
      -
-   * - /api/v1/users.regeneratePersonalAccessToken
+   * - /api/v1/user/regeneratePersonalAccessToken
      - 重新生成用户个人访问令牌。
      -
-   * - /api/v1/users.register
+   * - /api/v1/user/register
      - 注册新用户。
      -
-   * - /api/v1/users.removePersonalAccessToken
+   * - /api/v1/user/removePersonalAccessToken
      - 删除个人访问令牌。
      -
-   * - /api/v1/users.resetAvatar
+   * - /api/v1/user/resetAvatar
      - 重置用户的头像
      -
-   * - /api/v1/users.setAvatar
+   * - /api/v1/user/setAvatar
      - 设置用户的头像
      -
-   * - /api/v1/users.setPreferences
+   * - /api/v1/user/setPreferences
      - 设置用户的首选项
      -
-   * - /api/v1/users.update
+   * - /api/v1/user/update
      - 更新现有用户。
      -
-   * - /api/v1/users.updateOwnBasicInfo
+   * - /api/v1/user/updateOwnBasicInfo
      - 更新自己用户的基本信息。
      -
-
 
 .. automodule:: main.api.v1.user_views
    :members:
@@ -749,9 +744,6 @@ Emoji定制
 .. automodule:: main.api.v1.subscriptions_views
    :members:
    :undoc-members:
-
-
-               
 
 
 .. toctree::
