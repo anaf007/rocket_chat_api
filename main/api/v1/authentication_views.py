@@ -12,6 +12,16 @@ class Login(Resource):
     def put(self):
         """https://rocket.chat/docs/developer-guides/rest-api/authentication/login/
         
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/auth/login
+              - 不需要
+              - PUT
+
         请求参数:
          - username
          - pwd
@@ -99,6 +109,8 @@ class Me(Resource):
             'roles' : r['roles'],
             'success' : r['success']
         },200
+
+
 
 api.add_resource(Login, f'/api/{v1}/auth/login')   
 api.add_resource(Me, f'/api/{v1}/auth/me')   

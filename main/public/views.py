@@ -31,10 +31,21 @@ def home():
 
     url = 'http://localhost:5000/api/v1/auth/login'
 
-    result = put(url, data={'username': 'anngle02','pwd':'anngle02'})
+    result = put(url, data={'username': 'anaf','pwd':'123456'})
 
     userId = result.json()['userId']
     authToken = result.json()['authToken']
+
+    # result = put('http://localhost:5000/api/v1/user/register',
+    #     data={
+    #         'username': '6471755',
+    #         'email':'6471755@163.com',
+    #         'pwd':'6471755',
+    #         'name':'6471755name'
+    #     }
+    # )
+    # pprint(request)
+
 
     # try:
     #     r = rocket.users_create(

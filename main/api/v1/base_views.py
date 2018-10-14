@@ -4,7 +4,6 @@ from flask import request
 
 from pprint import pprint
 
-
 from .version import dev_1
 v1 = dev_1
 
@@ -18,7 +17,6 @@ class Info(Resource):
 
             from requests import get
             result = get(url)
-
 
         请求结果:
          - version:版本号
@@ -45,7 +43,6 @@ class Info(Resource):
           'version':r['info']['version'],
           'state':r['success']
         },200           
-
 
 
 class Directory(Resource):
@@ -159,8 +156,7 @@ class ShieldSvg(Resource):
 
         """
 
-        return {'state':'false','message':'端口暂未开放'},401
-
+        return {'state':False,'message':'端口暂未开放'},401
 
 
 class Spotlight(Resource):
@@ -206,6 +202,7 @@ class Spotlight(Resource):
                 "rooms": json,
                 "success":string
             }  
+
         """
 
         search_type = request.args.get('type')
@@ -259,7 +256,6 @@ class Statistics(Resource):
                 "statistics": json,
                 "success":boolean
             } 
-
 
         """
 
@@ -325,7 +321,6 @@ class StatisticsList(Resource):
               - 可选
               - 
 
-
         **示例请求**::
 
             result = get(url)
@@ -354,9 +349,6 @@ class StatisticsList(Resource):
             'statistics':r['statistics'],
             'success':r['success']
         },200
-
-
-
 
 
 

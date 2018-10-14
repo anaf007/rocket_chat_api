@@ -115,37 +115,37 @@
      - 已完成
    * - /api/v1/user/getUsernameSuggestion
      - 获取用户的建议
-     -
+     - 插件无该接口
    * - /api/v1/user/info
      - 获取用户的信息，仅限于调用者的权限。
-     -
+     - 已完成
    * - /api/v1/user/list
      - 所有用户及其信息，仅限于权限。
-     -
+     - 已完成
    * - /api/v1/user/regeneratePersonalAccessToken
      - 重新生成用户个人访问令牌。
-     -
+     - 插件无该接口
    * - /api/v1/user/register
      - 注册新用户。
-     -
+     - 已完成
    * - /api/v1/user/removePersonalAccessToken
      - 删除个人访问令牌。
-     -
+     - 插件无该接口
    * - /api/v1/user/resetAvatar
      - 重置用户的头像
-     -
+     - 已完成
    * - /api/v1/user/setAvatar
      - 设置用户的头像
-     -
+     - 已完成
    * - /api/v1/user/setPreferences
      - 设置用户的首选项
-     -
+     - 已完成
    * - /api/v1/user/update
      - 更新现有用户。
-     -
+     - 已完成
    * - /api/v1/user/updateOwnBasicInfo
      - 更新自己用户的基本信息。
-     -
+     - 插件无该接口
 
 .. automodule:: main.api.v1.user_views
    :members:
