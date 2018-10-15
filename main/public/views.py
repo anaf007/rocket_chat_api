@@ -36,15 +36,14 @@ def home():
     userId = result.json()['userId']
     authToken = result.json()['authToken']
 
-    # result = put('http://localhost:5000/api/v1/user/register',
-    #     data={
-    #         'username': '6471755',
-    #         'email':'6471755@163.com',
-    #         'pwd':'6471755',
-    #         'name':'6471755name'
-    #     }
-    # )
-    # pprint(request)
+    result = put('http://localhost:5000/api/v1/channels/create',
+        data={
+            'name': 'channelname1',
+            'members':'6471755,anaf,6471750',
+            'readOnly':1
+        }
+    )
+    pprint(request)
 
 
     # try:

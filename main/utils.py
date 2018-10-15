@@ -13,7 +13,6 @@ def flash_errors(form, category='warning'):
 
 
 
-#模板装饰器
 def templated(template=None):
     def decorator(f):
         @wraps(f)
@@ -30,3 +29,6 @@ def templated(template=None):
             return render_template(template_name, **ctx)
         return decorated_function
     return decorator
+
+
+

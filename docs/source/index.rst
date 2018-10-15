@@ -161,109 +161,108 @@
    * - URL
      - 描述
      - 进度
-   * - /api/v1/channels.addAll
+   * - /api/v1/channels/addAll
      - 将服务器上的所有用户添加到通道。
-     -
-   * - /api/v1/channels.archive
+     - 已完成
+   * - /api/v1/channels/archive
      - 存档一个频道。
-     -
-   * - /api/v1/channels.cleanHistory
+     - 已完成
+   * - /api/v1/channels/cleanHistory
      - 清理频道的历史记录，需要特殊许可。
-     -
-   * - /api/v1/channels.close
+     - 插件无该接口
+   * - /api/v1/channels/close
      - 从用户的频道列表中删除频道。
-     -
-   * - /api/v1/channels.counters
+     - 已完成
+   * - /api/v1/channels/counters
      - 获取通道计数器。
-     -
-   * - /api/v1/channels.create
+     - 插件无该接口
+   * - /api/v1/channels/create
      - 创建一个新频道。
-     -
-   * - /api/v1/channels.delete
+     - 已完成
+   * - /api/v1/channels/delete
      - 删除频道。
-     -
-   * - /api/v1/channels.files
+     - 已完成
+   * - /api/v1/channels/files
      - 获取通道中的文件列表。
-     -
-   * - /api/v1/channels.getAllUserMentionsByChannel
+     - 已完成
+   * - /api/v1/channels/getAllUserMentionsByChannel
      - 获取频道的所有提及。
-     -
-   * - /api/v1/channels.getIntegrations
+     - 已完成
+   * - /api/v1/channels/getIntegrations
      - 获取通道的集成。
-     -
-   * - /api/v1/channels.history
+     - 已完成
+   * - /api/v1/channels/history
      - 从通道中检索消息。
-     -
-   * - /api/v1/channels.info
+     - 已完成
+   * - /api/v1/channels/info
      - 获取频道的信息。
-     -
-   * - /api/v1/channels.invite
+     - 已完成
+   * - /api/v1/channels/invite
      - 将用户添加到频道。
-     -
-   * - /api/v1/channels.kick
+     - 已完成
+   * - /api/v1/channels/kick
      - 从频道中删除用户。
-     -
-   * - /api/v1/channels.leave
-     - 从通道中删除主叫用户。
-     -
-   * - /api/v1/channels.list
+     - 已完成
+   * - /api/v1/channels/leave
+     - 从通道中删除主用户。
+     - 已完成
+   * - /api/v1/channels/list
      - 从服务器检索所有通道。
-     -
-   * - /api/v1/channels.list.joined
+     - 已完成
+   * - /api/v1/channels/list_joined
      - 仅获取调用用户已加入的通道。
-     -
-   * - /api/v1/channels.members
-     - 检索所有频道用户。
-     -
-   * - /api/v1/channels.messages
+     - 已完成
+   * - /api/v1/channels/members
+     - 频道用户列表。
+     - 已完成
+   * - /api/v1/channels/messages
      - 检索所有频道消息。
      -
-   * - /api/v1/channels.moderators
+   * - /api/v1/channels/moderators
      - 列出频道的所有版主。
      -
-   * - /api/v1/channels.open
+   * - /api/v1/channels/open
      - 将频道添加回用户的频道列表。
      -
-   * - /api/v1/channels.rename
+   * - /api/v1/channels/rename
      - 更改频道的名称。
      -
-   * - /api/v1/channels.roles
+   * - /api/v1/channels/roles
      - 获取用户在频道中的角色。
      -
-   * - /api/v1/channels.setCustomFields
+   * - /api/v1/channels/setCustomFields
      - 设置频道的自定义字段。
      -
-   * - /api/v1/channels.setAnnouncement
+   * - /api/v1/channels/setAnnouncement
      - 设置频道的通知。
      -
-   * - /api/v1/channels.setDefault
+   * - /api/v1/channels/setDefault
      - 设置通道是否为默认通道。
      -
-   * - /api/v1/channels.setDescription
+   * - /api/v1/channels/setDescription
      - 设置频道的描述。
      -
-   * - /api/v1/channels.setJoinCode
+   * - /api/v1/channels/setJoinCode
      - 设置加入它所需的频道代码。
      -
-   * - /api/v1/channels.setPurpose
+   * - /api/v1/channels/setPurpose
      - 设置频道的说明。
      -
-   * - /api/v1/channels.setReadOnly
+   * - /api/v1/channels/setReadOnly
      - 设置通道是否为只读。
      -
-   * - /api/v1/channels.setTopic
+   * - /api/v1/channels/setTopic
      - 设置频道的主题。
      -
-   * - /api/v1/channels.setType
+   * - /api/v1/channels/setType
      - 设置频道应该是的房间类型。
      -
-   * - /api/v1/channels.unarchive
+   * - /api/v1/channels/unarchive
      - 取消归档频道。
      -
 
 .. automodule:: main.api.v1.channels_views
    :members:
-   :undoc-members: 
 
 
 群组

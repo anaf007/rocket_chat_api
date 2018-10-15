@@ -174,7 +174,7 @@ class CreateToken(Resource):
 
         **请求示例**::
 
-            r = rocket.users_create_token(username)
+            r = get(url,{'username':username})
         
         请求结果：
          - userId
