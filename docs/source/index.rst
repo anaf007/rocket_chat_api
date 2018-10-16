@@ -216,50 +216,50 @@
      - 频道用户列表。
      - 已完成
    * - /api/v1/channels/messages
-     - 检索所有频道消息。
-     -
+     - 获取频道所有消息。
+     - 插件无该接口
    * - /api/v1/channels/moderators
      - 列出频道的所有版主。
-     -
+     - 插件无该接口
    * - /api/v1/channels/open
      - 将频道添加回用户的频道列表。
-     -
+     - 已完成
    * - /api/v1/channels/rename
      - 更改频道的名称。
-     -
+     - 已完成
    * - /api/v1/channels/roles
-     - 获取用户在频道中的角色。
-     -
+     - 列出频道中所有用户的角色。
+     - 已完成
    * - /api/v1/channels/setCustomFields
      - 设置频道的自定义字段。
-     -
+     - 已完成
    * - /api/v1/channels/setAnnouncement
-     - 设置频道的通知。
-     -
+     - 设置频道公告。
+     - 已完成
    * - /api/v1/channels/setDefault
      - 设置通道是否为默认通道。
-     -
+     - 插件无该接口
    * - /api/v1/channels/setDescription
      - 设置频道的描述。
-     -
+     - 已完成
    * - /api/v1/channels/setJoinCode
-     - 设置加入它所需的频道代码。
-     -
+     - 设置加入频道所需的代码。
+     - 已完成
    * - /api/v1/channels/setPurpose
      - 设置频道的说明。
-     -
+     - 插件无该接口
    * - /api/v1/channels/setReadOnly
      - 设置通道是否为只读。
-     -
+     - 已完成
    * - /api/v1/channels/setTopic
      - 设置频道的主题。
-     -
+     - 已完成
    * - /api/v1/channels/setType
      - 设置频道应该是的房间类型。
-     -
+     - 已完成
    * - /api/v1/channels/unarchive
      - 取消归档频道。
-     -
+     - 已完成
 
 .. automodule:: main.api.v1.channels_views
    :members:
@@ -372,49 +372,48 @@
    * - URL
      - 描述
      - 进度
-   * - /api/v1/chat.delete
+   * - /api/v1/chat/chat_delete
      - 删除现有聊天消息。
-     -
-   * - /api/v1/chat.getMessage
-     - 检索单个聊天消息。    
-     -
-   * - /api/v1/chat.pinMessage
+     - 已完成
+   * - /api/v1/chat/getMessage
+     - 获取聊天消息。    
+     - 已完成
+   * - /api/v1/chat/pinMessage
      - 将聊天消息固定到消息的频道。
-     -
-   * - /api/v1/chat.postMessage
+     - 已完成
+   * - /api/v1/chat/postMessage
      - 发布新的聊天消息。
      -
-   * - /api/v1/chat.react
+   * - /api/v1/chat/react
      - 设置/取消设置用户对现有聊天消息的反应。
      -
-   * - /api/v1/chat.reportMessage
+   * - /api/v1/chat/reportMessage
      - 报告消息。
      -
-   * - /api/v1/chat.search
+   * - /api/v1/chat/search
      - 搜索频道中的消息。
      -
-   * - /api/v1/chat.starMessage
+   * - /api/v1/chat/starMessage
      - 为经过身份验证的用户标记聊天消息。
      -
-   * - /api/v1/chat.sendMessage
+   * - /api/v1/chat/sendMessage
      - 发送新的聊天消息。
      -     
-   * - /api/v1/chat.unPinMessage
+   * - /api/v1/chat/unPinMessage
      - 删除提供的聊天消息的固定状态。
      -
-   * - /api/v1/chat.unStarMessage
+   * - /api/v1/chat/unStarMessage
      - 删除已通过身份验证的用户的聊天消息中的星标。
      -
-   * - /api/v1/chat.update
+   * - /api/v1/chat/update
      - 更新聊天消息的文本。
      -
-   * - /api/v1/chat.getMessageReadReceipts
+   * - /api/v1/chat/getMessageReadReceipts
      - 检索邮件已读回执。
      -
 
 .. automodule:: main.api.v1.chat_views
    :members:
-   :undoc-members: 
 
 IM接口    
 ====================================================================
