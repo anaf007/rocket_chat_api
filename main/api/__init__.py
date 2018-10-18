@@ -11,3 +11,8 @@ from .v1 import authentication_views
 from .v1 import channels_views
 
 
+from .v1 import chat_views
+
+
+
+

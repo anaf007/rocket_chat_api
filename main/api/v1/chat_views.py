@@ -428,9 +428,9 @@ class PostMessage(Resource):
 
         return {
             'ts':r.json()['ts'],
-            'id':r.json()['_id'],
+            'channel':r.json()['channel'],
             'success':True
-        }
+        },200
 
 
 class React(Resource):

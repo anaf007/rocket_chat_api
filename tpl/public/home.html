@@ -15,16 +15,60 @@
   <input type="button" value="spotlight" onclick="spotlight()">
   <hr>
   <input type="text" name="" id='create_text' placeholder="create_user">
-  <input type="button" value="create_user" onclick="create_user()">
+  <input type="button" value="创建用户" onclick="create_user()">
+  <hr>
+  <input type="button" value="channel_list" onclick="channel_list()">
+  <hr>
+  <input type="text" name="" id='post_text' placeholder="post_user">
+  <input type="button" value="发消息" onclick="postmsg()">
+  
 
 </div>
 <h1 id="message"></h1>
 <script type="text/javascript" src="http://static.anaf.cn/jquery-3.3.1.min.js"></script>
 
 <script type="text/javascript">
+function postmsg(){
+    var post_text = document.getElementById('post_text').value;
+    if(post_text==''){return;};
+    var postmsg_data = {
+      'roomId':'GENERAL',
+      'channel':'general',
+      'text':post_text,
+    };
+    $.ajax({
+       url: '/api/v1/chat/postMessage',
+       type: 'PUT',
+       data:postmsg_data,
+       success: function( data ) {
+        var msg_html = '';
+        msg_html = '<br>success:'+data.success+msg_html;
+        msg_html = '<br>channel:'+data.channel;
+        msg_html = '<br>ts:'+data.ts;
+        document.getElementById('message').innerHTML = '<br>发送成功。'+msg_html+document.getElementById('message').innerHTML;
+       }
+    });
+
+}
+
+function channel_list(){
+  $.ajax({
+     url: '/api/v1/channels/channels_list',
+     type: 'GET',
+     success: function( data ) {
+      var msg_html = '<ul>';
+      for (var i = 0; i < data.channels.length; i++) {
+        msg_html += "<li>room_id:"+ data.channels[i]._id+"。channel:"+data.channels[i].name+"</li><br>";
+      }
+      msg_html += '</ul>';
+      document.getElementById('message').innerHTML = '<br>获取成功。'+data.count+'个。'+msg_html+document.getElementById('message').innerHTML;
+     }
+  });
+}
 
 function create_user(){
   var create_text = document.getElementById('create_text').value;
+  if(create_text==''){return;};
   var create_data = {
       'email':create_text+'@163.com',
       'name':create_text,
@@ -51,7 +95,7 @@ function create_user(){
       document.getElementById('create_text').value = '';
      }
   });
-}
+};
 
 
 function submit(){

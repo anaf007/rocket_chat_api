@@ -385,7 +385,7 @@ https://github.com/jadolg/rocketchat_API
      - 已完成
    * - /api/v1/chat/postMessage
      - 发布新的聊天消息。
-     -
+     - 已完成
    * - /api/v1/chat/react
      - 设置/取消设置用户对现有聊天消息的反应。
      -

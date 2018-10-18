@@ -91,7 +91,6 @@ class Me(Resource):
         try:
             r = rocket.me()
         except Exception as e:
-            print(str(e))
             r = None
 
         if not r:
