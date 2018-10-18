@@ -97,14 +97,29 @@ class Directory(Resource):
 
         if not r:
             return {'state':'false','message':'查询失败，没有查询到对应的信息。'},401
+        
+        # if (r['status']=='error'):
+        #     return {'state':'false','message':'需要登录'},401
+        
+        try:
+            return {
+                'count':r['count'],
+                'offset':r['offset'],
+                'result':r['result'],
+                'success':r['success'],
+                'total':r['total'],
+            },200
+        except Exception as e:
+            return {'state':False,'message':'请先登录。'}
 
-        return {
-            'count':r['count'],
-            'offset':r['offset'],
-            'result':r['result'],
-            'success':r['success'],
-            'total':r['total'],
-        },200
+
+        # return {
+        #     'count':r['count'],
+        #     'offset':r['offset'],
+        #     'result':r['result'],
+        #     'success':r['success'],
+        #     'total':r['total'],
+        # },200
         
 
 class ShieldSvg(Resource):
@@ -190,9 +205,9 @@ class Spotlight(Resource):
               - 必要
               - 描述
             * - 类型
-              - #
-              - ['#','@']
-              - #选项为房间，@为用户
+              - 0
+              - [0,1]
+              - 0选项为房间，1为用户
             * - 名称
               - rocket
               - 必填项
@@ -200,7 +215,7 @@ class Spotlight(Resource):
 
         **示例请求**::
 
-            result = get(url,{'type':type,'text':text})
+            result = get(url,{'type':1,'text':'users'})
 
         **请求结果**::
 
@@ -210,18 +225,30 @@ class Spotlight(Resource):
                 "success":string
             }  
 
+        ::
+
+            {
+                "users": [
+                {
+                  "_id": "rocket.cat",
+                  "name": "Rocket.Cat",
+                  "username": "rocket.cat",
+                  "status": "online"
+                }
+              ],
+              "rooms": [],
+              "success": true
+            }
+
         """
 
-        search_type = request.args.get('type')
+        search_type = request.args.get('type',0)
         earch_text = request.args.get('text')
 
-        if search_type != '#' or search_type != '@':
-            return {'state':'false','message':'查询类型有误，请输入正确的查询类型。'},401
-        if search_type == '#':
-            earch_text = '#'+earch_text
-
-        if search_type == '@':
+        if search_type:
             earch_text = '@'+earch_text
+        else:
+            earch_text = '#'+earch_text
 
         try:
             r = rocket.spotlight(earch_text).json()

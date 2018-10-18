@@ -34,20 +34,21 @@ def home():
     userId = result.json()['userId']
     authToken = result.json()['authToken']
 
-    url = 'http://localhost:5000/api/v1/bases/directory'
-    result = get(url,{"text":'channelname1', "type":0})
+    # url = 'http://localhost:5000/api/v1/bases/spotlight'
+    # result = get(url,{'type':1,'text':'anaf'})
+    # # result = get(url,{"text":'channelname1', "type":0})
 
-    if result:
-        print(result.json())
-        print('request.json()')
-    else:
-        print(result.json())
-        print('result')
+    # if result:
+    #     print(result.json())
+    #     print('request.json()')
+    # else:
+    #     print(result.json())
+    #     print('result')
 
 
 
 
-    return "<h1>main home</h1>"
+    return dict()
 
 
 @blueprint.route('/logout/')
@@ -77,5 +78,18 @@ def register():
 @templated()
 def about():
     """About page."""
+
+    url = 'http://localhost:5000/api/v1/bases/spotlight'
+    result = get(url,{'type':1,'text':'anaf'})
+
+    if result:
+        print(result.json())
+        print('request.json()')
+    else:
+        print(result.json())
+        print('result')
+
+
+
     form = LoginForm(request.form)
     return dict(form=form)

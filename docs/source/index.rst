@@ -7,6 +7,8 @@
 项目rocket_chat_api的api文档
 ===========================================
 
+https://github.com/jadolg/rocketchat_API
+
 该项目依赖rocket_chat，必须先运行。
 
 插件rocketchat_API

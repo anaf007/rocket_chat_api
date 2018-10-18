@@ -245,7 +245,6 @@ class PostMessage(Resource):
               - 可选
               - 可选的附加值，有关详细，看下面的介绍
 
-
         可选细节：一般为对象数组，可以有许多部分，包括：
          - 作者信息
          - 标题信息
@@ -419,18 +418,13 @@ class PostMessage(Resource):
         channel = request.form['channel']
         text = request.form['text']
 
-        if channel:
-            channel = "#"+channel
-        else:
-            channel = False 
-
         try:
-            r = rocket.chat_delete(room_id=roomId,msg_id=msgId,asUser=asUser)
+            r = rocket.chat_post_message(room_id=roomId,channel=channel,text=text)
         except Exception as e:
             r = None
 
         if not r:
-            return {'success':False,'message':'删除失败。'},401
+            return {'success':False,'message':'发送失败。'},401
 
         return {
             'ts':r.json()['ts'],
