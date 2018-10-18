@@ -10,8 +10,9 @@ from .v1 import authentication_views
 #频道
 from .v1 import channels_views
 
-
 from .v1 import chat_views
+
+from .v1 import groups_views
 
 
 

@@ -81,7 +81,7 @@ class ChatDelete(Resource):
             'ts':r.json()['ts'],
             'id':r.json()['_id'],
             'success':True
-        }
+        },200
 
 
 class GetMessage(Resource):
@@ -135,7 +135,7 @@ class GetMessage(Resource):
         return {
             'message':r.json()['message'],
             'success':True
-        }  
+        }  ,200
 
 
 class PinMessage(Resource):
@@ -189,7 +189,7 @@ class PinMessage(Resource):
         return {
             'message':r.json()['message'],
             'success':True
-        }  
+        },200  
 
 
 class PostMessage(Resource):
@@ -436,15 +436,74 @@ class PostMessage(Resource):
 class React(Resource):
     """设置/取消现有聊天
     
-    https://rocket.chat/docs/developer-guides/rest-api/chat/delete/
+    https://rocket.chat/docs/developer-guides/rest-api/chat/react/
+
     """
-    pass
+    def put(self):
+        """
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/chat/react
+              - 需要auth
+              - PUT
+        
+        .. list-table:: 请求参数
+            :header-rows: 1
+
+            * - 参数名称
+              - 示例
+              - 必须
+              - 描述
+            * - emoji
+              - smile
+              - 必须
+              - 表情字符
+            * - messageId
+              - 7aDSXtjMA3KPLxLjt
+              - 必须
+              - 消息id
+            * - shouldReact
+              - 1
+              - 0或者1
+              - 移除或添加
+
+        **请求示例**::
+
+            r = put(url,data={'emoji':'smile','messageId':'7aDSXtjMA3KPLxLjt','shouldReact':1})
+
+        **请求结果**:
+         - success:boolean
+
+        """ 
+        emoji = request.form['emoji']
+        messageId = request.form['messageId']
+        shouldReact = request.form['shouldReact']
+        if shouldReact:
+            shouldReact = True
+        else:
+            shouldReact = False
+        
+        try:
+            r = rocket.chat_react(emoji=emoji,messageId=messageId,shouldReact=shouldReact)
+        except Exception as e:
+            r = None
+
+        if not r:
+            return {'success':False,'message':'操作失败。'},401
+
+        return {
+            'success':True
+        },200
 
 
 class ReportMessage(Resource):
-    """汇报聊天信息
+    """汇报聊天信息,插件无该接口.
     
-    https://rocket.chat/docs/developer-guides/rest-api/chat/delete/
+    https://rocket.chat/docs/developer-guides/rest-api/chat/reportmessage/
     """
     pass
 
@@ -452,23 +511,148 @@ class ReportMessage(Resource):
 class ChatSearch(Resource):
     """搜索聊天信息
     
-    https://rocket.chat/docs/developer-guides/rest-api/chat/delete/
+    https://rocket.chat/docs/developer-guides/rest-api/chat/search/
     """
-    pass
+    def put(self):
+        """
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/chat/chatSearch
+              - 需要auth
+              - PUT
+        
+        .. list-table:: 请求参数
+            :header-rows: 1
+
+            * - 参数名称
+              - 示例
+              - 必须
+              - 描述
+            * - roomId
+              - 7aDSXtjMA3KPLxLjt
+              - 必须
+              - 频道id
+            * - searchText
+              - test to search
+              - 必须
+              - 查找的信息
+            * - count
+              - 10
+              - 
+              - 限制返回结果
+
+        **请求示例**::
+
+            r = put(url,data={'roomId':'7aDSXtjMA3KPLxLjt','searchText':'text','count':1})
+
+        **请求结果**:
+         - success:boolean
+         - messages:json
+
+        ::
+
+          {
+              "messages": [
+                  {
+                      "_id": "px9KLW9G2SfD5DKFt",
+                      "rid": "GENERAL",
+                      "msg": "this is a test",
+                      "ts": "2018-10-17T14:44:00.549Z",
+                      "u": {
+                          "_id": "RtMDEYc28fQ5aHpf4",
+                          "username": "marcos.defendi",
+                          "name": "Marcos Defendi"
+                      },
+                      "mentions": [],
+                      "channels": [],
+                      "_updatedAt": "2018-10-17T14:44:00.550Z",
+                      "score": 0.5833333333333334
+                  }
+              ],
+              "success": true
+          }
+
+
+        """ 
+        roomId = request.form['roomId']
+        searchText = request.form['searchText']
+        count = request.form['count']
+        
+        try:
+            r = rocket.chat_search(room_id=roomId,search_text=searchText,count=count)
+        except Exception as e:
+            r = None
+
+        if not r:
+            return {'success':False,'message':'查询失败。'},401
+
+        return {
+            'success':True,
+            'messages':r.json()['messages']
+        }  ,200
 
 
 class StarMessage(Resource):
-    """开始聊天
+    """标记聊天信息
     
-    https://rocket.chat/docs/developer-guides/rest-api/chat/delete/
+    https://rocket.chat/docs/developer-guides/rest-api/chat/starmessage/
     """
-    pass
+    def get(self):
+        """
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/chat/starMessage
+              - 需要auth
+              - GET
+        
+        .. list-table:: 请求参数
+            :header-rows: 1
+
+            * - 参数名称
+              - 示例
+              - 必须
+              - 描述
+            * - messageId
+              - 7aDSXtjMA3KPLxLjt
+              - 必须
+              - 消息id
+            
+
+        **请求示例**::
+
+            r = get(url,data={'messageId':'7aDSXtjMA3KPLxLjt'})
+
+        **请求结果**:
+         - success:boolean
+
+        """ 
+        messageId = request.form['messageId']
+        
+        try:
+            r = rocket.chat_star_message(msg_id=messageId)
+        except Exception as e:
+            r = None
+
+        if not r:
+            return {'success':False,'message':'标记失败。'},401
+
+        return {
+            'success':True
+        },200
 
 
 class SendMessage(Resource):
-    """发送聊天信息
-    
-    https://rocket.chat/docs/developer-guides/rest-api/chat/delete/
+    """发送聊天信息，postMessage和sendMessage区别：sendMessage允许允许将_id的值传递给另一个，sendMessage只允许发送到一个频道，而另一个则允许一次发送到多个频道
+    参数太多，暂使用postmessage
+    https://rocket.chat/docs/developer-guides/rest-api/chat/sendmessage/
     """
     pass
 
@@ -476,33 +660,266 @@ class SendMessage(Resource):
 class UnPinMessage(Resource):
     """删除聊天窗口
     
-    https://rocket.chat/docs/developer-guides/rest-api/chat/delete/
+    https://rocket.chat/docs/developer-guides/rest-api/chat/unpinmessage/
     """
-    pass
+    def get(self):
+        """
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/chat/unPinMessage
+              - 需要auth
+              - GET
+        
+        .. list-table:: 请求参数
+            :header-rows: 1
+
+            * - 参数名称
+              - 示例
+              - 必须
+              - 描述
+            * - msgId
+              - 7aDSXtjMA3KPLxLjt
+              - 必须
+              - 需要pin消息的id
+
+        **请求示例**::
+
+            r = get(url,data={'msgId':'7aDSXtjMA3KPLxLjt'})
+
+        **请求结果**:
+         - success:boolean
+
+        """ 
+        msgId = request.form['msgId']
+        
+        try:
+            r = rocket.chat_unpin_message(msg_id=msgId)
+        except Exception as e:
+            r = None
+
+        if not r:
+            return {'success':False,'message':'取消pin失败。'},401
+
+        return {
+            'success':True
+        },200
 
 
 class UnStarMessage(Resource):
-    """删除开始聊天状态
+    """删除标记聊天信息
     
-    https://rocket.chat/docs/developer-guides/rest-api/chat/delete/
+    https://rocket.chat/docs/developer-guides/rest-api/chat/unstarmessage/
     """
-    pass
+    def get(self):
+        """
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/chat/unStarMessage
+              - 需要auth
+              - GET
+        
+        .. list-table:: 请求参数
+            :header-rows: 1
+
+            * - 参数名称
+              - 示例
+              - 必须
+              - 描述
+            * - messageId
+              - 7aDSXtjMA3KPLxLjt
+              - 必须
+              - 消息id
+
+        **请求示例**::
+
+            r = get(url,data={'messageId':'7aDSXtjMA3KPLxLjt'})
+
+        **请求结果**:
+         - success:boolean
+
+        """ 
+        msgId = request.form['msgId']
+        
+        try:
+            r = rocket.chat_unstar_message(msg_id=msgId)
+        except Exception as e:
+            r = None
+
+        if not r:
+            return {'success':False,'message':'取消标记失败。'},401
+
+        return {
+            'success':True
+        },200
 
 
 class ChatUpdate(Resource):
     """更新信息
     
-    https://rocket.chat/docs/developer-guides/rest-api/chat/delete/
+    https://rocket.chat/docs/developer-guides/rest-api/chat/update/
     """
-    pass
+    def put(self):
+        """
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/chat/chatUpdate
+              - 需要auth
+              - PUT
+        
+        .. list-table:: 请求参数
+            :header-rows: 1
+
+            * - 参数名称
+              - 示例
+              - 必须
+              - 描述
+            * - roomId
+              - 7aDSXtjMA3KPLxLjt
+              - 必须
+              - 频道id
+            * - msgId
+              - 7aDSXtjMA3KPLxLjt
+              - 必须
+              - 消息id
+            * - text
+              - Updated text
+              - 必须
+              - 要更新的信息
+
+        **请求示例**::
+
+            r = put(url,data={'roomId':'roomId','msgId':'msgId','text':text})
+
+        **请求结果**:
+         - success:boolean
+         - message:json
+
+        ::
+
+          {
+              "message": {
+                  "_id": "qGdhTGDnhMLJPQYY8",
+                  "rid": "GENERAL",
+                  "msg": "gif+ testing update",
+                  "ts": "2017-01-05T17:06:14.403Z",
+                  "u": {
+                      "_id": "R4jgcQaQhvvK6K3iY",
+                      "username": "graywolf336"
+                  },
+                  "_updatedAt": "2017-01-05T19:42:20.433Z",
+                  "editedAt": "2017-01-05T19:42:20.431Z",
+                  "editedBy": {
+                      "_id": "R4jgcQaQhvvK6K3iY",
+                      "username": "graywolf336"
+                  }
+              },
+              "success": true
+          }
+        """ 
+        roomId = request.form['roomId']
+        msgId = request.form['msgId']
+        text = request.form['text']
+        
+        try:
+            r = rocket.chat_update(room_id=roomId,msg_id=msgId,text=text)
+        except Exception as e:
+            r = None
+
+        if not r:
+            return {'success':False,'message':'更新失败。'},401
+
+        return {
+            'success':True,
+            'message':r.json()['message']
+        },200
+
 
 
 class GetMessageReadReceipts(Resource):
     """检索聊天信息回复
     
-    https://rocket.chat/docs/developer-guides/rest-api/chat/delete/
+    https://rocket.chat/docs/developer-guides/rest-api/chat/getmessagereadreceipts/
     """
-    pass
+    def get(self):
+        """
+        .. list-table:: 请求信息
+            :header-rows: 1
+
+            * - URL
+              - Auth
+              - HTTP方法
+            * - /api/v1/chat/getMessageReadReceipts
+              - 需要auth
+              - GET
+        
+        .. list-table:: 请求参数
+            :header-rows: 1
+
+            * - 参数名称
+              - 示例
+              - 必须
+              - 描述
+            * - messageId
+              - 7aDSXtjMA3KPLxLjt
+              - 必须
+              - 消息id
+
+        **请求示例**::
+
+            r = get(url,data={'messageId':'7aDSXtjMA3KPLxLjt'})
+
+        **请求结果**:
+         - success:boolean
+         - receipts:json
+
+        ::
+
+          {
+              "receipts": [
+                  {
+                      "_id": "HksCYdTpCiM9DZ7Sa",
+                      "roomId": "GENERAL",
+                      "userId": "nvw6PBrXTejp4sfQt",
+                      "messageId": "WyDsZzjk2wHogtWK2",
+                      "ts": "2018-02-26T20:34:03.907Z",
+                      "user": {
+                          "username": "rocket.cat",
+                          "name": "Rocket cat",
+                          "_id": "nvw6PBrXTejp4sfQt"
+                      }
+                  }
+              ],
+              "success": true
+          }
+
+
+        """ 
+        messageId = request.form['messageId']
+        
+        try:
+            r = rocket.chat_get_message_read_receipts(msg_id=messageId)
+        except Exception as e:
+            r = None
+
+        if not r:
+            return {'success':False,'message':'取消标记失败。'},401
+
+        return {
+            'success':True,
+            'receipts':r.json()['receipts'],
+        },200
 
 
 
@@ -512,12 +929,12 @@ api.add_resource(PinMessage, f'/api/{v1}/chat/pinMessage')
 api.add_resource(PostMessage, f'/api/{v1}/chat/postMessage')  
 api.add_resource(React, f'/api/{v1}/chat/react')  
 api.add_resource(ReportMessage, f'/api/{v1}/chat/report_message')  
-api.add_resource(ChatSearch, f'/api/{v1}/chat/chat_search')  
-api.add_resource(StarMessage, f'/api/{v1}/chat/star_message')  
+api.add_resource(ChatSearch, f'/api/{v1}/chat/chatSearch')  
+api.add_resource(StarMessage, f'/api/{v1}/chat/starMessage')  
 api.add_resource(SendMessage, f'/api/{v1}/chat/send_message')  
-api.add_resource(UnPinMessage, f'/api/{v1}/chat/un_pin_message')  
-api.add_resource(UnStarMessage, f'/api/{v1}/chat/un_star_message')  
-api.add_resource(ChatUpdate, f'/api/{v1}/chat/chat_update')  
+api.add_resource(UnPinMessage, f'/api/{v1}/chat/unPinMessage')  
+api.add_resource(UnStarMessage, f'/api/{v1}/chat/unStarMessage')  
+api.add_resource(ChatUpdate, f'/api/{v1}/chat/chatUpdate')  
 api.add_resource(GetMessageReadReceipts, f'/api/{v1}/chat/get_message_read_receipts')  
 
 

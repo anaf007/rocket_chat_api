@@ -20,7 +20,6 @@ https://github.com/jadolg/rocketchat_API
 基本信息
 ====================================================================
 
-
 .. list-table:: 基本信息功能列表，共计8个
    :header-rows: 1
 
@@ -156,7 +155,6 @@ https://github.com/jadolg/rocketchat_API
 频道
 ====================================================================
 
-
 .. list-table:: 频道列表，共计33个
    :header-rows: 1
 
@@ -270,103 +268,100 @@ https://github.com/jadolg/rocketchat_API
 群组
 ====================================================================
 
-
 .. list-table:: 群组列表，共计27个
    :header-rows: 1
 
    * - URL
      - 描述
      - 进度
-   * - /api/v1/groups.archive
-     - 归档一个私人团体。
-     -
-   * - /api/v1/groups.close   
+   * - /api/v1/groups/archive
+     - 保存该聊天群组。
+     - 已完成
+   * - /api/v1/groups/close   
      - 从组列表中删除私有组。
      -
-   * - /api/v1/groups.counters
+   * - /api/v1/groups/counters
      - 获取组计数器。
      -
-   * - /api/v1/groups.create
+   * - /api/v1/groups/create
      - 创建一个新的私人组。
      -
-   * - /api/v1/groups.delete
+   * - /api/v1/groups/delete
      - 删除私人组。
      -
-   * - /api/v1/groups.files
+   * - /api/v1/groups/files
      - 获取私有组中的文件列表。
      -
-   * - /api/v1/groups.history
+   * - /api/v1/groups/history
      - 从私有组中检索消息。
      -
-   * - /api/v1/groups.info
+   * - /api/v1/groups/info
      - 获取有关专用组的信息。
      -
-   * - /api/v1/groups.invite
+   * - /api/v1/groups/invite
      - 将用户添加到私有组。
      -
-   * - /api/v1/groups.kick
+   * - /api/v1/groups/kick
      - 从私有组中删除用户。
      -
-   * - /api/v1/groups.leave
+   * - /api/v1/groups/leave
      - 从私有组中删除主叫用户。
      -
-   * - /api/v1/groups.list
+   * - /api/v1/groups/list
      - 列出调用者所属的私有组。
      -
-   * - /api/v1/groups.listAll
+   * - /api/v1/groups/listAll
      - 列出所有私人组。
      -
-   * - /api/v1/groups.members
+   * - /api/v1/groups/members
      - 获取私有组的参与者的用户。
      -
-   * - /api/v1/groups.messages
+   * - /api/v1/groups/messages
      - 检索所有组消息。
      -
-   * - /api/v1/groups.moderators
+   * - /api/v1/groups/moderators
      - 列出组的所有主持人。
      -
-   * - /api/v1/groups.open
+   * - /api/v1/groups/open
      - 将专用组添加回组列表。  
      -
-   * - /api/v1/groups.rename
+   * - /api/v1/groups/rename
      - 更改专用组的名称。
      -
-   * - /api/v1/groups.roles
+   * - /api/v1/groups/roles
      - 获取用户在私有组中的角色。
      -
-   * - /api/v1/groups.setAnnouncement
+   * - /api/v1/groups/setAnnouncement
      - 设置组的公告。
      -
-   * - /api/v1/groups.setCustomFields
+   * - /api/v1/groups/setCustomFields
      - 设置专用组的自定义字段。
      -
-   * - /api/v1/groups.setDescription
+   * - /api/v1/groups/setDescription
      - 设置私人组的描述。
      -
-   * - /api/v1/groups.setPurpose
+   * - /api/v1/groups/setPurpose
      - 设置私人组的宗旨。
      -
-   * - /api/v1/groups.setReadOnly
+   * - /api/v1/groups/setReadOnly
      - 设置房间是否为只读。
      -
-   * - /api/v1/groups.setTopic
+   * - /api/v1/groups/setTopic
      - 设置私人组的主题。
      -
-   * - /api/v1/groups.setType
+   * - /api/v1/groups/setType
      - 设置此组的房间类型。
      -
-   * - /api/v1/groups.unarchive
+   * - /api/v1/groups/unarchive
      - 取消归档私人组。
      -
 
-
 .. automodule:: main.api.v1.groups_views
    :members:
-   :undoc-members: 
+
 
 聊天接口
 ====================================================================
-
 
 .. list-table:: 聊天接口列表，共计13个
    :header-rows: 1
@@ -388,38 +383,37 @@ https://github.com/jadolg/rocketchat_API
      - 已完成
    * - /api/v1/chat/react
      - 设置/取消设置用户对现有聊天消息的反应。
-     -
+     - 已完成
    * - /api/v1/chat/reportMessage
      - 报告消息。
-     -
+     - 插件无该接口
    * - /api/v1/chat/search
      - 搜索频道中的消息。
-     -
+     - 已完成
    * - /api/v1/chat/starMessage
-     - 为经过身份验证的用户标记聊天消息。
-     -
+     - 标记聊天消息。
+     - 已完成
    * - /api/v1/chat/sendMessage
      - 发送新的聊天消息。
-     -     
+     - 暂定
    * - /api/v1/chat/unPinMessage
      - 删除提供的聊天消息的固定状态。
-     -
+     - 已完成
    * - /api/v1/chat/unStarMessage
-     - 删除已通过身份验证的用户的聊天消息中的星标。
-     -
+     - 删除标记信息。
+     - 已完成
    * - /api/v1/chat/update
      - 更新聊天消息的文本。
-     -
+     - 已完成
    * - /api/v1/chat/getMessageReadReceipts
      - 检索邮件已读回执。
-     -
+     - 已完成
 
 .. automodule:: main.api.v1.chat_views
    :members:
 
 IM接口    
 ====================================================================
-
 
 .. list-table:: IM接口 列表，共计12个
    :header-rows: 1
