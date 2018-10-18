@@ -5,34 +5,70 @@
 </head>
 <body>
 <h1>main home</h1>
+<div id="login">
+  <input type="" id="username" placeholder="username" value="anaf"> <br>
+  <input type="password" id="password" placeholder="password" value="123456"> <br>
+  <input type="button" value="submit" onclick="submit()">
+</div>
 
+<div class="result">
+  <input type="button" value="spotlight" onclick="spotlight()">
+  <input type="button" value="create_user" onclick="create_user()">
+
+</div>
 <h1 id="message"></h1>
 <script type="text/javascript" src="http://static.anaf.cn/jquery-3.3.1.min.js"></script>
 
 <script type="text/javascript">
-  
+
+function create_user(){
+    $.ajax({
+     url: '/api/v1/user/create',
+     type: 'PUT',
+     data:{'email': 'test04@163.com','name':'test04','password':'test04','username':'test04'},
+     success: function( data ) {
+      var msg_html = '';
+      msg_html = '<br>status:'+data.status+msg_html;
+      msg_html = '<br>user:'+data.user._id;
+      document.getElementById('message').innerHTML = '<br>创建成功。'+msg_html+document.getElementById('message').innerHTML;
+     }
+  });
+}
+
+function submit(){
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
   $.ajax({
      url: '/api/v1/auth/login',
      type: 'PUT',
-     data:{'username': 'anaf','pwd':'123456'},
+     data:{'username': username,'pwd':password},
      success: function( data ) {
-      document.getElementById('message').innerHTML += '<br>login:<br>status:'+data.status;
-      document.getElementById('message').innerHTML += '<br>userID:'+data.userId;
-      document.getElementById('message').innerHTML += '<br>token:'+data.authToken;
+      var msg_html = '';
+      msg_html = '<br>status:'+data.status+msg_html;
+      msg_html = '<br>userID:'+data.userId+msg_html;
+      msg_html = '<br>token:'+data.authToken+msg_html;
+      document.getElementById('message').innerHTML = '<br>登录成功。'+msg_html;
+      document.getElementById('login').style.display = 'none';
      }
   });
 
-  $.ajax({
+}      
+function  spotlight(){
+    $.ajax({
      url: '/api/v1/bases/spotlight',
      type: 'GET',
      data:{'type': 1,'text':'anaf'},
      success: function( data ) {
-      document.getElementById('message').innerHTML += '<br>spotlight:success:'+data.success;
-      document.getElementById('message').innerHTML += '<br>rooms:'+data.rooms;
-      document.getElementById('message').innerHTML += '<br>users:'+data.users[0].username;
-      // alert('ok');
+      var msg_html = '';
+      msg_html = '<br>success:'+data.success+msg_html;
+      msg_html = '<br>rooms:'+data.rooms+msg_html;
+      msg_html = '<br>users:'+data.users[0].username+msg_html;
+      document.getElementById('message').innerHTML = msg_html+document.getElementById('message').innerHTML;
      }
   });
+}
+
+  
 
 </script>
 </body>

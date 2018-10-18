@@ -6,7 +6,7 @@ from pprint import pprint
 
 class CreateUser(Resource):
     """创建新用户。"""
-    def post(self):
+    def put(self):
         """https://rocket.chat/docs/developer-guides/rest-api/users/create/
 
         .. list-table:: 请求信息
@@ -17,7 +17,7 @@ class CreateUser(Resource):
               - HTTP方法
             * - /api/v1/user/create
               - 需要auth
-              - POST
+              - PUT
 
         .. list-table:: 请求参数
             :header-rows: 1
@@ -109,17 +109,18 @@ class CreateUser(Resource):
 
         """
 
-        email = request.form['email']
-        name = request.form['name']
-        password = request.form['password']
-        username = request.form['username']
-        active = request.form['active']
-        roles = request.form['roles']
-        joinDefaultChannels = request.form['joinDefaultChannels']
-        requirePasswordChange = request.form['requirePasswordChange']
-        sendWelcomeEmail = request.form['sendWelcomeEmail']
-        verified = request.form['verified']
-        customFields = request.form['customFields']
+        form = request.form
+        email = form['email']
+        name = form['name']
+        password = form['password']
+        username = form['username']
+        # active = form['active']
+        # roles = form['roles']
+        # joinDefaultChannels = form['joinDefaultChannels']
+        # requirePasswordChange = form['requirePasswordChange']
+        # sendWelcomeEmail = form['sendWelcomeEmail']
+        # verified = form['verified']
+        # customFields = form['customFields']
 
         try:
             r = rocket.users_create(
@@ -127,19 +128,18 @@ class CreateUser(Resource):
                 name=name,
                 password=password,
                 username=username,
-                active=active,
-                roles=roles,
-                joinDefaultChannels=joinDefaultChannels,
-                requirePasswordChange=requirePasswordChange,
-                sendWelcomeEmail=sendWelcomeEmail,
-                verified=verified,
-                customFields=customFields,
+                # active=active,
+                # roles=roles,
+                # joinDefaultChannels=joinDefaultChannels,
+                # requirePasswordChange=requirePasswordChange,
+                # sendWelcomeEmail=sendWelcomeEmail,
+                # verified=verified,
+                # customFields=customFields,
             ).json()
         except Exception as e:
             return {'user':[],'success':false,'message':'创建用户失败，请确认必填项已填写。'}
-
         return {
-            'user': r['users'],
+            'user': r['user'],
             'success':r['success']
         },200          
 
