@@ -348,8 +348,6 @@ class PostMessage(Resource):
               - 必须
               - 字段的值，显示在标题之下
 
-
-
         **官方请求示例**::
 
             {
@@ -414,15 +412,17 @@ class PostMessage(Resource):
               "success": true
             }
 
+        **由于参数太多，暂时按照最少的是只需要3个参数，频道id、名称、和内容，其他省略：**
+
         """ 
         roomId = request.form['roomId']
-        msgId = request.form['msgId']
-        asUser = request.form['asUser']
+        channel = request.form['channel']
+        text = request.form['text']
 
-        if asUser:
-            asUser = True
+        if channel:
+            channel = "#"+channel
         else:
-            asUser = False 
+            channel = False 
 
         try:
             r = rocket.chat_delete(room_id=roomId,msg_id=msgId,asUser=asUser)

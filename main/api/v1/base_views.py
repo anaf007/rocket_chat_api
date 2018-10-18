@@ -37,7 +37,7 @@ class Info(Resource):
             r = None
 
         if not r:
-            return {'state':'false'},404
+            return {'state':'false'},401
 
         return {
           'version':r['info']['version'],
@@ -54,7 +54,7 @@ class Directory(Resource):
         需登录
         
         **请求参数**：
-         - type:[channels,users]
+         - type:0:channels,1:users
          - text:字符串，需要查询的用户或房间名称
 
         **示例请求**::
@@ -66,7 +66,7 @@ class Directory(Resource):
               --data-urlencode 'query={"text": "rocket", "type": "users"}'
             #or
             from requests import get
-            result = get(url,{"text":'rocket', "type": 'users'})
+            result = get(url,{"text":'rocket', "type": 1})
         
         请求结果:
          - count
@@ -77,11 +77,18 @@ class Directory(Resource):
 
         """
 
-        search_type = request.args.get('type')
+        search_type = request.args.get('type',0)
         earch_text = request.args.get('text')
 
-        if search_type != 'channels' or search_type != 'users':
-            return {'state':'false','message':'查询类型有误，请输入正确的查询类型。'},401
+        # if search_type != 'channels' :
+        #     return {'state':'false','message':'查询类型有误，请输入正确的查询类型。'},401
+        # if search_type != 'users':
+        #     return {'state':'false','message':'查询类型有误，请输入正确的查询类型。'},401
+        
+        if search_type:
+            search_type = 'channels'
+        else:
+            search_type = 'users'
 
         try:
             r = rocket.directory({"text":earch_text, "type": search_type}).json()

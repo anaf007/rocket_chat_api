@@ -30,51 +30,24 @@ def home():
     """Home page."""
 
     url = 'http://localhost:5000/api/v1/auth/login'
-
     result = put(url, data={'username': 'anaf','pwd':'123456'})
-
     userId = result.json()['userId']
     authToken = result.json()['authToken']
 
-    result = put('http://localhost:5000/api/v1/channels/create',
-        data={
-            'name': 'channelname1',
-            'members':'6471755,anaf,6471750',
-            'readOnly':1
-        }
-    )
-    pprint(request)
+    url = 'http://localhost:5000/api/v1/bases/directory'
+    result = get(url,{"text":'channelname1', "type":0})
 
-
-    # try:
-    #     r = rocket.users_create(
-    #         email='anngle02@163.com',
-    #         name='anngle02',
-    #         password='anngle02',
-    #         username='anngle02'
-    #     )
-    # except Exception as e:
-    #     print(ste(e))
-    #     r = 'error'
-
-    # print(r.json())
-
-    # pprint(r)
+    if result:
+        print(result.json())
+        print('request.json()')
+    else:
+        print(result.json())
+        print('result')
 
 
 
 
-    form = LoginForm(request.form)
-    # Handle logging in
-    if request.method == 'POST':
-        if form.validate_on_submit():
-            login_user(form.user)
-            flash('You are logged in.', 'success')
-            redirect_url = request.args.get('next') or url_for('user.members')
-            return redirect(redirect_url)
-        else:
-            flash_errors(form)
-    return dict(form=form)
+    return "<h1>main home</h1>"
 
 
 @blueprint.route('/logout/')
