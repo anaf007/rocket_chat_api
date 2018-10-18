@@ -13,6 +13,8 @@
 
 <div class="result">
   <input type="button" value="spotlight" onclick="spotlight()">
+  <hr>
+  <input type="text" name="" id='create_text' placeholder="create_user">
   <input type="button" value="create_user" onclick="create_user()">
 
 </div>
@@ -22,18 +24,35 @@
 <script type="text/javascript">
 
 function create_user(){
+  var create_text = document.getElementById('create_text').value;
+  var create_data = {
+      'email':create_text+'@163.com',
+      'name':create_text,
+      'password':create_text,
+      'username':create_text,
+      'active':null,
+      'roles':null,
+      'joinDefaultChannels':null,
+      'requirePasswordChange':null,
+      'sendWelcomeEmail':null,
+      'verified':null,
+      'customFields':null,
+  };
+
     $.ajax({
      url: '/api/v1/user/create',
      type: 'PUT',
-     data:{'email': 'test04@163.com','name':'test04','password':'test04','username':'test04'},
+     data:create_data,
      success: function( data ) {
       var msg_html = '';
       msg_html = '<br>status:'+data.status+msg_html;
       msg_html = '<br>user:'+data.user._id;
-      document.getElementById('message').innerHTML = '<br>创建成功。'+msg_html+document.getElementById('message').innerHTML;
+      document.getElementById('message').innerHTML = '<br>创建用户成功。'+msg_html+document.getElementById('message').innerHTML;
+      document.getElementById('create_text').value = '';
      }
   });
 }
+
 
 function submit(){
   var username = document.getElementById('username').value;
@@ -52,7 +71,8 @@ function submit(){
      }
   });
 
-}      
+}  
+
 function  spotlight(){
     $.ajax({
      url: '/api/v1/bases/spotlight',

@@ -114,13 +114,13 @@ class CreateUser(Resource):
         name = form['name']
         password = form['password']
         username = form['username']
-        # active = form['active']
-        # roles = form['roles']
-        # joinDefaultChannels = form['joinDefaultChannels']
-        # requirePasswordChange = form['requirePasswordChange']
-        # sendWelcomeEmail = form['sendWelcomeEmail']
-        # verified = form['verified']
-        # customFields = form['customFields']
+        active = form['active']
+        roles = form['roles']
+        joinDefaultChannels = form['joinDefaultChannels']
+        requirePasswordChange = form['requirePasswordChange']
+        sendWelcomeEmail = form['sendWelcomeEmail']
+        verified = form['verified']
+        customFields = form['customFields']
 
         try:
             r = rocket.users_create(
