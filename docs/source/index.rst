@@ -274,87 +274,87 @@ https://github.com/jadolg/rocketchat_API
    * - URL
      - 描述
      - 进度
-   * - /api/v1/groups/archive
+   * - /api/v1/groups/groupArchive
      - 保存该聊天群组。
      - 已完成
    * - /api/v1/groups/close   
-     - 从组列表中删除私有组。
-     -
+     - 从组列表中删除私有群组。
+     - 已完成
    * - /api/v1/groups/counters
-     - 获取组计数器。
-     -
+     - 获取群组计数。
+     - 插件无该接口
    * - /api/v1/groups/create
-     - 创建一个新的私人组。
-     -
+     - 创建群组。
+     - 已完成
    * - /api/v1/groups/delete
      - 删除私人组。
-     -
+     - 已完成
    * - /api/v1/groups/files
      - 获取私有组中的文件列表。
-     -
+     - 已完成
    * - /api/v1/groups/history
-     - 从私有组中检索消息。
-     -
+     - 从私有组中检索历史消息。
+     - 已完成
    * - /api/v1/groups/info
      - 获取有关专用组的信息。
-     -
+     - 已完成
    * - /api/v1/groups/invite
      - 将用户添加到私有组。
-     -
+     - 已完成
    * - /api/v1/groups/kick
      - 从私有组中删除用户。
-     -
+     - 已完成
    * - /api/v1/groups/leave
-     - 从私有组中删除主叫用户。
-     -
+     - 从私有组中删除主用户。
+     - 已完成
    * - /api/v1/groups/list
      - 列出调用者所属的私有组。
-     -
+     - 已完成
    * - /api/v1/groups/listAll
-     - 列出所有私人组。
-     -
+     - 列出所有群组包含私人组。
+     - 已完成
    * - /api/v1/groups/members
-     - 获取私有组的参与者的用户。
-     -
+     - 获取群组内的用户
+     - 已完成
    * - /api/v1/groups/messages
      - 检索所有组消息。
-     -
+     - 插件无该接口
    * - /api/v1/groups/moderators
      - 列出组的所有主持人。
-     -
+     - 插件无该接口
    * - /api/v1/groups/open
      - 将专用组添加回组列表。  
-     -
+     - 已完成
    * - /api/v1/groups/rename
-     - 更改专用组的名称。
-     -
+     - 更改群组名称。
+     - 已完成
    * - /api/v1/groups/roles
      - 获取用户在私有组中的角色。
-     -
+     - 已完成
    * - /api/v1/groups/setAnnouncement
      - 设置组的公告。
-     -
+     - 插件无该接口
    * - /api/v1/groups/setCustomFields
      - 设置专用组的自定义字段。
-     -
+     - 插件无该接口
    * - /api/v1/groups/setDescription
      - 设置私人组的描述。
-     -
+     - 已完成
    * - /api/v1/groups/setPurpose
      - 设置私人组的宗旨。
-     -
+     - 插件无该接口
    * - /api/v1/groups/setReadOnly
      - 设置房间是否为只读。
-     -
+     - 已完成
    * - /api/v1/groups/setTopic
-     - 设置私人组的主题。
-     -
+     - 设置私有组话题。
+     - 已完成
    * - /api/v1/groups/setType
      - 设置此组的房间类型。
-     -
+     - 已完成
    * - /api/v1/groups/unarchive
      - 取消归档私人组。
-     -
+     - 已完成
 
 .. automodule:: main.api.v1.groups_views
    :members:

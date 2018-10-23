@@ -37,7 +37,11 @@ def register_extensions(app):
     bootstrap.init_app(app)
     
     #添加rest_ful_api
-    from main import api as v_api
+    try:
+        from main import api as v_api
+    except Exception as e:
+        return {'success':False,'message':'api接口操作失败。'},401
+    
     api.init_app(app)
     
     return None
